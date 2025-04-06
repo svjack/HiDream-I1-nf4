@@ -3,8 +3,7 @@ from hi_diffusers import HiDreamImagePipeline
 from hi_diffusers import HiDreamImageTransformer2DModel
 from hi_diffusers.schedulers.fm_solvers_unipc import FlowUniPCMultistepScheduler
 from transformers import LlamaForCausalLM, PreTrainedTokenizerFast
-
-pretrained_model_name_or_path = "HiDream-I1"
+pretrained_model_name_or_path = "HiDream-ai/HiDream-I1-Full"
 scheduler = FlowUniPCMultistepScheduler(num_train_timesteps=1000, shift=1, use_dynamic_shifting=False)
 tokenizer_4 = PreTrainedTokenizerFast.from_pretrained(
     "meta-llama/Meta-Llama-3.1-8B-Instruct",
