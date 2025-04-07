@@ -1,14 +1,11 @@
 import torch
-import argparse
+import gradio as gr
 from hi_diffusers import HiDreamImagePipeline
 from hi_diffusers import HiDreamImageTransformer2DModel
 from hi_diffusers.schedulers.fm_solvers_unipc import FlowUniPCMultistepScheduler
 from hi_diffusers.schedulers.flash_flow_match import FlashFlowMatchEulerDiscreteScheduler
 from transformers import LlamaForCausalLM, PreTrainedTokenizerFast
-parser = argparse.ArgumentParser()
-parser.add_argument("--model_type", type=str, default="dev")
-args = parser.parse_args()
-model_type = args.model_type
+
 MODEL_PREFIX = "HiDream-ai"
 LLAMA_MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct"
 
@@ -100,7 +97,18 @@ def parse_resolution(resolution_str):
         return 1024, 1024  # Default fallback
 
 # Generate image function
-def generate_image(pipe, model_type, prompt, resolution, seed):
+def generate_image(model_type, prompt, resolution, seed):
+    global pipe, current_model
+    
+    # Reload model if needed
+    if model_type != current_model:
+        del pipe
+        torch.cuda.empty_cache()
+        print(f"Loading {model_type} model...")
+        pipe, config = load_models(model_type)
+        current_model = model_type
+        print(f"{model_type} model loaded successfully!")
+    
     # Get configuration for current model
     config = MODEL_CONFIGS[model_type]
     guidance_scale = config["guidance_scale"]
@@ -129,10 +137,54 @@ def generate_image(pipe, model_type, prompt, resolution, seed):
 
 # Initialize with default model
 print("Loading default model (full)...")
-pipe, _ = load_models(model_type)
+current_model = "full"
+pipe, _ = load_models(current_model)
 print("Model loaded successfully!")
-prompt = "A cat holding a sign that says \"Hi-Dreams.ai\"." 
-resolution = "1024 × 1024 (Square)"
-seed = -1
-image, seed = generate_image(pipe, model_type, prompt, resolution, seed)
-image.save("output.png")
+
+# Create Gradio interface
+with gr.Blocks(title="HiDream Image Generator") as demo:
+    gr.Markdown("# HiDream Image Generator")
+    
+    with gr.Row():
+        with gr.Column():
+            model_type = gr.Radio(
+                choices=list(MODEL_CONFIGS.keys()),
+                value="full",
+                label="Model Type",
+                info="Select model variant"
+            )
+            
+            prompt = gr.Textbox(
+                label="Prompt", 
+                placeholder="A cat holding a sign that says \"Hi-Dreams.ai\".", 
+                lines=3
+            )
+            
+            resolution = gr.Radio(
+                choices=RESOLUTION_OPTIONS,
+                value=RESOLUTION_OPTIONS[0],
+                label="Resolution",
+                info="Select image resolution"
+            )
+            
+            seed = gr.Number(
+                label="Seed (use -1 for random)", 
+                value=-1, 
+                precision=0
+            )
+            
+            generate_btn = gr.Button("Generate Image")
+            seed_used = gr.Number(label="Seed Used", interactive=False)
+            
+        with gr.Column():
+            output_image = gr.Image(label="Generated Image", type="pil")
+    
+    generate_btn.click(
+        fn=generate_image,
+        inputs=[model_type, prompt, resolution, seed],
+        outputs=[output_image, seed_used]
+    )
+
+# Launch app
+if __name__ == "__main__":
+    demo.launch()

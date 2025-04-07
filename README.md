@@ -1,6 +1,6 @@
 # HiDream-I1
 
-`HiDream-I1` is a series of state-of-the-art open-source image generation models featuring a 16 billion parameter rectified flow transformer with Mixture of Experts architecture, designed to create high-quality images from text prompts.
+`HiDream-I1` is a new open-source image generative foundation model with 17B parameters that achieves state-of-the-art image generation quality within seconds.
 
 ## Project Updates
 - ```2025/4/7```: We've open-sourced the text-to-image model **HiDream-I1**. 
@@ -13,8 +13,8 @@ We offer both the full version and distilled models. For more information about 
 | Name            | Script                                             | Inference Steps | HuggingFace repo       |
 | --------------- | -------------------------------------------------- | --------------- | ---------------------- |
 | HiDream-I1-Full | [inference.py](./inference.py)                     | 50              | 🤗 [HiDream-I1-Full](https://huggingface.co/HiDream-ai/HiDream-I1-Full)  |
-| HiDream-I1-Dev  | [inference_distilled.py](./inference_distilled.py) | 28              | 🤗 [HiDream-I1-Dev](https://huggingface.co/HiDream-ai/HiDream-I1-Dev) |
-| HiDream-I1-Fast | [inference_distilled.py](./inference_distilled.py) | 16              | 🤗 [HiDream-I1-Fast](https://huggingface.co/HiDream-ai/HiDream-I1-Fast) |
+| HiDream-I1-Dev  | [inference.py](./inference_distilled.py) | 28              | 🤗 [HiDream-I1-Dev](https://huggingface.co/HiDream-ai/HiDream-I1-Dev) |
+| HiDream-I1-Fast | [inference.py](./inference_distilled.py) | 16              | 🤗 [HiDream-I1-Fast](https://huggingface.co/HiDream-ai/HiDream-I1-Fast) |
 
 
 ## Quick Start
@@ -26,18 +26,25 @@ pip install -r requirements.txt
 Then you can run the inference scripts to generate images:
 
 ``` python 
-
 # For full model inference
-python ./inference.py
+python ./inference.py --model_type full
 
 # For distilled dev model inference
-INFERENCE_STEP=28 PRETRAINED_MODEL_NAME_OR_PATH=HiDream-ai/HiDream-I1-Dev python inference_distilled.py
+python ./inference.py --model_type dev
 
 # For distilled fast model inference
-INFERENCE_STEP=16 PRETRAINED_MODEL_NAME_OR_PATH=HiDream-ai/HiDream-I1-Fast python inference_distilled.py
-
+python ./inference.py --model_type fast
 ```
 > **Note:** The inference script will automatically download `meta-llama/Meta-Llama-3.1-8B-Instruct` model files. If you encounter network issues, you can download these files ahead of time and place them in the appropriate cache directory to avoid download failures during inference.
+
+## Gradio Demo
+
+We also provide a Gradio demo for interactive image generation. You can run the demo with:
+
+``` python
+python gradio_demo.py 
+```
+
 
 
 ## Evaluation Metrics

@@ -337,7 +337,7 @@ class HiDreamImageTransformer2DModel(
         return x
 
     def patchify(self, x, max_seq, img_sizes=None):
-        pz2 = self.patch_size * self.patch_size
+        pz2 = self.config.patch_size * self.config.patch_size
         if isinstance(x, torch.Tensor):
             B, C = x.shape[0], x.shape[1]
             device = x.device
