@@ -1,5 +1,7 @@
 # HiDream-I1
 
+![HiDream-I1 Demo](assets/demo.jpg)
+
 `HiDream-I1` is a new open-source image generative foundation model with 17B parameters that achieves state-of-the-art image generation quality within seconds.
 
 ## Project Updates
