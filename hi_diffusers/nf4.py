@@ -1,10 +1,11 @@
 import torch
 import argparse
-from hi_diffusers import HiDreamImagePipeline
-from hi_diffusers import HiDreamImageTransformer2DModel
-from hi_diffusers.schedulers.fm_solvers_unipc import FlowUniPCMultistepScheduler
-from hi_diffusers.schedulers.flash_flow_match import FlashFlowMatchEulerDiscreteScheduler
 from transformers import LlamaForCausalLM, PreTrainedTokenizerFast
+
+from . import HiDreamImagePipeline
+from . import HiDreamImageTransformer2DModel
+from .schedulers.fm_solvers_unipc import FlowUniPCMultistepScheduler
+from .schedulers.flash_flow_match import FlashFlowMatchEulerDiscreteScheduler
 
 
 MODEL_PREFIX = "azaneko"
