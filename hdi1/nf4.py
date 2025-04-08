@@ -86,7 +86,7 @@ def generate_image(pipe: HiDreamImagePipeline, model_type: str, prompt: str, res
     num_inference_steps = config["num_inference_steps"]
     
     # Parse resolution
-    height, width = resolution
+    width, height = resolution
  
     # Handle seed
     if seed == -1:
