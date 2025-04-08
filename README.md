@@ -1,6 +1,8 @@
 # HiDream-I1 4Bit Quantized Model
 
-This repository is a fork of `HiDream-I1` quantized to 4 bits, allowing the full model to run in less than 16GB of VRAM.
+This repository is a fork of `HiDream-I1` quantized to 4 bits, allowing the full model to run in less than 16GB of VRAM. 
+
+The original repository can be found [here](https://github.com/HiDream-ai/HiDream-I1).
 
 > `HiDream-I1` is a new open-source image generative foundation model with 17B parameters that achieves state-of-the-art image generation quality within seconds.
 
@@ -10,44 +12,50 @@ This repository is a fork of `HiDream-I1` quantized to 4 bits, allowing the full
 
 ## Models
 
-We offer both the full version and distilled models. For more information about the models, please refer to the link under Usage.
+We offer both the full version and distilled models. The parameter size are the same, so they require the same amount of GPU memory to run. However, the distilled models are faster because of reduced number of inference steps.
 
-| Name            | Script                                             | Inference Steps | HuggingFace repo       |
-| --------------- | -------------------------------------------------- | --------------- | ---------------------- |
-| HiDream-I1-Full | [inference.py](./inference.py)                     | 50              | 🤗 [HiDream-I1-Full](https://huggingface.co/HiDream-ai/HiDream-I1-Full)  |
-| HiDream-I1-Dev  | [inference.py](./inference.py)                     | 28              | 🤗 [HiDream-I1-Dev](https://huggingface.co/HiDream-ai/HiDream-I1-Dev) |
-| HiDream-I1-Fast | [inference.py](./inference.py)                     | 16              | 🤗 [HiDream-I1-Fast](https://huggingface.co/HiDream-ai/HiDream-I1-Fast) |
+| Name            | Min VRAM | Steps | HuggingFace                                                                                                                  |
+|-----------------|----------|-------|------------------------------------------------------------------------------------------------------------------------------|
+| HiDream-I1-Full | 16 GB    | 50    | 🤗 [Original](https://huggingface.co/HiDream-ai/HiDream-I1-Full) / [NF4](https://huggingface.co/azaneko/HiDream-I1-Full-nf4) |
+| HiDream-I1-Dev  | 16 GB    | 28    | 🤗 [Original](https://huggingface.co/HiDream-ai/HiDream-I1-Dev) / [NF4](https://huggingface.co/azaneko/HiDream-I1-Dev-nf4)   |
+| HiDream-I1-Fast | 16 GB    | 16    | 🤗 [Original](https://huggingface.co/HiDream-ai/HiDream-I1-Fast) / [NF4](https://huggingface.co/azaneko/HiDream-I1-Fast-nf4) |
 
+## Hardware Requirements
+
+- GPU Architecture: NVIDIA `>= Ampere` (e.g. A100, H100, A40, RTX 3090, RTX 4090)
+- GPU RAM: `>= 16 GB`
+- CPU RAM: `>= 16 GB`
 
 ## Quick Start
-Please make sure you have installed [Flash Attention](https://github.com/Dao-AILab/flash-attention). We recommend CUDA versions 12.4 for the manual installation.
+
+Simply run:
+
 ```
-pip install -r requirements.txt
+pip install hdi1 --no-build-isolation
 ```
 
-Then you can run the inference scripts to generate images:
+### Command Line Interface
+
+Then you can run the module to generate images:
 
 ``` python 
-python -m hi_diffusers "A cat holding a sign that says 'hello world'"
+python -m hdi1 "A cat holding a sign that says 'hello world'"
 
 # or you can specify the model
-python -m hi_diffusers "A cat holding a sign that says 'hello world'" -m fast
+python -m hdi1 "A cat holding a sign that says 'hello world'" -m fast
 ```
 
-> **Note:** The inference script will automatically download `meta-llama/Meta-Llama-3.1-8B-Instruct` model files. If you encounter network issues, you can download these files ahead of time and place them in the appropriate cache directory to avoid download failures during inference.
+> **Note:** The module will automatically download `meta-llama/Meta-Llama-3.1-8B-Instruct` model files. If you encounter network issues, you can download these files ahead of time and place them in the appropriate cache directory to avoid download failures during inference.
 
-## Gradio Dashboard
+### Web Dashboard
 
-We also provide a Gradio demo for interactive image generation. You can run the demo with:
+We also provide a web dashboard for interactive image generation. You can start it by running:
 
 ``` python
-pip install gradio
-python gradio_demo.py 
+python -m hdi1.web
 ```
 
 ![image](https://github.com/user-attachments/assets/39b72f8e-6114-4971-ab5f-0aa39ad81963)
-
-
 
 ## License
 

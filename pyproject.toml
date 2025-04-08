@@ -28,3 +28,10 @@ dependencies = [
     "transformers>=4.47.1",
 ]
 
+[tool.setuptools]
+packages = ["hdi1"]
+
+[project.urls]
+Homepage = "https://github.com/hykilpikonna/HiDream-I1-nf4"
+Repository = "https://github.com/hykilpikonna/HiDream-I1-nf4"
+Issues = "https://github.com/hykilpikonna/HiDream-I1-nf4/issues"
