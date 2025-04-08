@@ -34,6 +34,11 @@ Simply run:
 pip install hdi1 --no-build-isolation
 ```
 
+> [!NOTE]
+> It's recommended that you start a new python environment for this package to avoid dependency conflicts.  
+> To do that, you can use `conda create -n hdi1 python=3.12` and then `conda activate hdi1`.  
+> Or you can use `python3 -m venv venv` and then `source venv/bin/activate` on Linux or `venv\Scripts\activate` on Windows.
+
 ### Command Line Interface
 
 Then you can run the module to generate images:
@@ -45,7 +50,8 @@ python -m hdi1 "A cat holding a sign that says 'hello world'"
 python -m hdi1 "A cat holding a sign that says 'hello world'" -m fast
 ```
 
-> **Note:** The module will automatically download `meta-llama/Meta-Llama-3.1-8B-Instruct` model files. If you encounter network issues, you can download these files ahead of time and place them in the appropriate cache directory to avoid download failures during inference.
+> [!NOTE]
+> The inference script will try to automatically download `meta-llama/Llama-3.1-8B-Instruct` model files. You need to [agree to the license of the Llama model](https://huggingface.co/meta-llama/Llama-3.1-8B-Instruct) on your HuggingFace account and login using `huggingface-cli login` in order to use the automatic downloader.
 
 ### Web Dashboard
 
