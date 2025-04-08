@@ -9,7 +9,8 @@
 <span style="color: #FF5733; font-weight: bold">For more features and to experience the full capabilities of our product, please visit [https://vivago.ai/](https://vivago.ai/).</span>
 
 ## Project Updates
-- ```2025/4/7```: We've open-sourced the text-to-image model **HiDream-I1**. 
+- 🤗 **April 8, 2025**: We've launched a Hugging Face Space for **HiDream-I1-Dev**. Experience our model firsthand at [https://huggingface.co/spaces/HiDream-ai/HiDream-I1-Dev](https://huggingface.co/spaces/HiDream-ai/HiDream-I1-Dev)!
+- 🚀 **April 7, 2025**: We've open-sourced the text-to-image model **HiDream-I1**. 
 
 
 ## Models
