@@ -2,7 +2,11 @@
 
 ![HiDream-I1 Demo](assets/demo.jpg)
 
+
+
 `HiDream-I1` is a new open-source image generative foundation model with 17B parameters that achieves state-of-the-art image generation quality within seconds.
+
+<span style="color: #FF5733; font-weight: bold">For more features and to experience the full capabilities of our product, please visit [https://vivago.ai/](https://vivago.ai/).</span>
 
 ## Project Updates
 - ```2025/4/7```: We've open-sourced the text-to-image model **HiDream-I1**. 
