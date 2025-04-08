@@ -27,15 +27,12 @@ pip install -r requirements.txt
 Then you can run the inference scripts to generate images:
 
 ``` python 
-# For full model inference
-python ./inference.py --model_type full
+python -m hi_diffusers "A cat holding a sign that says 'hello world'"
 
-# For distilled dev model inference
-python ./inference.py --model_type dev
-
-# For distilled fast model inference
-python ./inference.py --model_type fast
+# or you can specify the model
+python -m hi_diffusers "A cat holding a sign that says 'hello world'" -m fast
 ```
+
 > **Note:** The inference script will automatically download `meta-llama/Meta-Llama-3.1-8B-Instruct` model files. If you encounter network issues, you can download these files ahead of time and place them in the appropriate cache directory to avoid download failures during inference.
 
 ## Gradio Demo
@@ -43,6 +40,7 @@ python ./inference.py --model_type fast
 We also provide a Gradio demo for interactive image generation. You can run the demo with:
 
 ``` python
+pip install gradio
 python gradio_demo.py 
 ```
 
