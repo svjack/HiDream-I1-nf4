@@ -2,6 +2,9 @@
 
 ![HiDream-I1 Demo](assets/demo.jpg)
 
+![image](https://github.com/user-attachments/assets/6d444129-5070-4be8-894a-52466d86ed4e)
+
+
 
 This repository is a fork of `HiDream-I1` quantized to 4 bits, allowing it to run in less than 16GB of VRAM.
 
