@@ -4,20 +4,12 @@ from hi_diffusers import HiDreamImagePipeline
 from hi_diffusers import HiDreamImageTransformer2DModel
 from hi_diffusers.schedulers.fm_solvers_unipc import FlowUniPCMultistepScheduler
 from hi_diffusers.schedulers.flash_flow_match import FlashFlowMatchEulerDiscreteScheduler
-from transformers import LlamaForCausalLM, PreTrainedTokenizerFast, BitsAndBytesConfig
-parser = argparse.ArgumentParser()
-parser.add_argument("--model_type", type=str, default="dev")
-args = parser.parse_args()
-model_type = args.model_type
+from transformers import LlamaForCausalLM, PreTrainedTokenizerFast
 
 
 MODEL_PREFIX = "azaneko"
 LLAMA_MODEL_NAME = "hugging-quants/Meta-Llama-3.1-8B-Instruct-GPTQ-INT4"
 
-bnb_config = BitsAndBytesConfig(
-    load_in_4bit=True,
-    bnb_4bit_compute_dtype="float16"
-)
 
 # Model configurations
 MODEL_CONFIGS = {
@@ -44,11 +36,12 @@ MODEL_CONFIGS = {
     }
 }
 
+
 def log_vram(msg: str):
     print(msg)
     print(f"GPU memory usage: {torch.cuda.memory_allocated() / 1024**2:.2f} MB")
 
-# Load models
+
 def load_models(model_type: str):
     config = MODEL_CONFIGS[model_type]
     
@@ -85,9 +78,9 @@ def load_models(model_type: str):
     
     return pipe, config
 
-# Generate image function
+
 @torch.inference_mode()
-def generate_image(pipe, model_type, prompt, resolution, seed):
+def generate_image(pipe: HiDreamImagePipeline, model_type: str, prompt: str, resolution: tuple[int, int], seed: int):
     # Get configuration for current model
     config = MODEL_CONFIGS[model_type]
     guidance_scale = config["guidance_scale"]
@@ -114,13 +107,3 @@ def generate_image(pipe, model_type, prompt, resolution, seed):
     
     return images[0], seed
 
-# Initialize with default model
-print("Loading default model (full)...")
-pipe, _ = load_models(model_type)
-print("Model loaded successfully!")
-prompt = "A cat holding a sign that says \"I1 nf4\"." 
-# Possible values: 1024x1024, 768x1360, 1360x768, 880x1168, 1168x880, 1248x832, 832x1248
-resolution = (1024, 1024)
-seed = -1
-image, seed = generate_image(pipe, model_type, prompt, resolution, seed)
-image.save("output.png")
