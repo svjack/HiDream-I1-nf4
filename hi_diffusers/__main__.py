@@ -1,10 +1,13 @@
 from .nf4 import *
 
 import argparse
-import time
+import Time
+import logging
 
 
 if __name__ == "__main__":
+    logging.getLogger("transformers.modeling_utils").setLevel(logging.ERROR)
+    
     parser = argparse.ArgumentParser()
     
     parser.add_argument("prompt", type=str, help="Prompt to generate image from")

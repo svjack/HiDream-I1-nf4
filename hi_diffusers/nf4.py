@@ -38,15 +38,14 @@ MODEL_CONFIGS = {
 
 
 def log_vram(msg: str):
-    print(msg)
-    print(f"GPU memory usage: {torch.cuda.memory_allocated() / 1024**2:.2f} MB")
+    print(f"{msg} (used {torch.cuda.memory_allocated() / 1024**2:.2f} MB VRAM)\n")
 
 
 def load_models(model_type: str):
     config = MODEL_CONFIGS[model_type]
     
     tokenizer_4 = PreTrainedTokenizerFast.from_pretrained(LLAMA_MODEL_NAME)
-    log_vram("Tokenizer loaded!")
+    log_vram("✅ Tokenizer loaded!")
     
     text_encoder_4 = LlamaForCausalLM.from_pretrained(
         LLAMA_MODEL_NAME,
@@ -56,14 +55,14 @@ def load_models(model_type: str):
         torch_dtype=torch.bfloat16,
         device_map="auto",
     )
-    log_vram("Text encoder loaded!")
+    log_vram("✅ Text encoder loaded!")
 
     transformer = HiDreamImageTransformer2DModel.from_pretrained(
         config["path"],
         subfolder="transformer",
         torch_dtype=torch.bfloat16
     )
-    log_vram("Transformer loaded!")
+    log_vram("✅ Transformer loaded!")
     
     pipe = HiDreamImagePipeline.from_pretrained(
         config["path"],
@@ -73,7 +72,7 @@ def load_models(model_type: str):
         torch_dtype=torch.bfloat16,
     )
     pipe.transformer = transformer
-    log_vram("Pipeline loaded!")
+    log_vram("✅ Pipeline loaded!")
     pipe.enable_sequential_cpu_offload()
     
     return pipe, config
