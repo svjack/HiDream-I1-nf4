@@ -1,14 +1,12 @@
 # HiDream-I1 4Bit Quantized Model
 
-![HiDream-I1 Demo](assets/demo.jpg)
-
-![image](https://github.com/user-attachments/assets/6d444129-5070-4be8-894a-52466d86ed4e)
-
-
-
-This repository is a fork of `HiDream-I1` quantized to 4 bits, allowing it to run in less than 16GB of VRAM.
+This repository is a fork of `HiDream-I1` quantized to 4 bits, allowing the full model to run in less than 16GB of VRAM.
 
 > `HiDream-I1` is a new open-source image generative foundation model with 17B parameters that achieves state-of-the-art image generation quality within seconds.
+
+![HiDream-I1 Demo](assets/demo.jpg)
+
+![image](https://github.com/user-attachments/assets/d4715fb9-efe1-40c3-bd4e-dfd626492eea)
 
 ## Models
 
