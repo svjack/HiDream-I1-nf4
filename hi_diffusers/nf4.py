@@ -1,5 +1,4 @@
 import torch
-import argparse
 from transformers import LlamaForCausalLM, PreTrainedTokenizerFast
 
 from . import HiDreamImagePipeline
