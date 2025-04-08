@@ -39,13 +39,16 @@ python ./inference.py --model_type fast
 ```
 > **Note:** The inference script will automatically download `meta-llama/Meta-Llama-3.1-8B-Instruct` model files. If you encounter network issues, you can download these files ahead of time and place them in the appropriate cache directory to avoid download failures during inference.
 
-## Gradio Demo
+## Gradio Dashboard
 
 We also provide a Gradio demo for interactive image generation. You can run the demo with:
 
 ``` python
 python gradio_demo.py 
 ```
+
+![image](https://github.com/user-attachments/assets/39b72f8e-6114-4971-ab5f-0aa39ad81963)
+
 
 
 ## License
