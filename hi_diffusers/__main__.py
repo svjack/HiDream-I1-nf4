@@ -1,7 +1,7 @@
 from .nf4 import *
 
 import argparse
-import Time
+import time
 import logging
 
 
