@@ -1,11 +1,12 @@
 # HiDream-I1 4Bit Quantized Model
 
-![HiDream-I1 Demo](assets/demo.jpg)
-
-
-This repository is a fork of `HiDream-I1` quantized to 4 bits, allowing it to run in less than 16GB of VRAM.
+This repository is a fork of `HiDream-I1` quantized to 4 bits, allowing the full model to run in less than 16GB of VRAM.
 
 > `HiDream-I1` is a new open-source image generative foundation model with 17B parameters that achieves state-of-the-art image generation quality within seconds.
+
+![HiDream-I1 Demo](assets/demo.jpg)
+
+![image](https://github.com/user-attachments/assets/d4715fb9-efe1-40c3-bd4e-dfd626492eea)
 
 ## Models
 
@@ -35,7 +36,7 @@ python -m hi_diffusers "A cat holding a sign that says 'hello world'" -m fast
 
 > **Note:** The inference script will automatically download `meta-llama/Meta-Llama-3.1-8B-Instruct` model files. If you encounter network issues, you can download these files ahead of time and place them in the appropriate cache directory to avoid download failures during inference.
 
-## Gradio Demo
+## Gradio Dashboard
 
 We also provide a Gradio demo for interactive image generation. You can run the demo with:
 
@@ -43,6 +44,9 @@ We also provide a Gradio demo for interactive image generation. You can run the 
 pip install gradio
 python gradio_demo.py 
 ```
+
+![image](https://github.com/user-attachments/assets/39b72f8e-6114-4971-ab5f-0aa39ad81963)
+
 
 
 ## License
