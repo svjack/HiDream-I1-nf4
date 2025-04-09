@@ -61,7 +61,7 @@ We also provide a web dashboard for interactive image generation. You can start 
 python -m hdi1.web
 ```
 
-![image](https://github.com/user-attachments/assets/39b72f8e-6114-4971-ab5f-0aa39ad81963)
+![Screenshot 2025-04-08 200120](https://github.com/user-attachments/assets/0c464033-5619-489d-b9de-fef5a7119cfc)
 
 ## License
 
