@@ -1,3 +1,30 @@
+```bash
+conda activate system
+pip install torch==2.5.0 torchvision
+
+pip install hdi1 --no-build-isolation
+
+pip uninstall torch torchvision -y
+pip install torch==2.5.0 torchvision
+pip install https://github.com/Dao-AILab/flash-attention/releases/download/v2.7.4.post1/flash_attn-2.7.4.post1+cu12torch2.5cxx11abiFALSE-cp311-cp311-linux_x86_64.whl
+
+python -m hdi1 "A cat holding a sign that says 'hello world'"
+
+python -m hdi1 "A cat holding a sign that says 'hello world'" -m fast
+
+edit share = True
+vim /environment/miniconda3/envs/system/lib/python*/site-packages/hdi1/web.py
+
+python -m hdi1.web
+featurize port export 7860
+
+可ui 调用
+
+古装提示词：
+这是一张高质量的艺术照片，一位留着黑色长发的年轻女子，穿着白色的中国传统旗袍，站在模糊的雪地背景下。灯光柔和自然，突显出她平静的表情。该图像使用浅景深，聚焦在背景模糊的物体上。构图遵循三分法，女人的脸偏离中心。这张照片可能是用单反相机拍摄的，可能是佳能EOS 5D Mark IV，光圈设置为f/2.8，快门速度为1/200，ISO 400。其美学品质极高，展现出优雅的简洁与宁静的氛围。
+
+```
+
 # HiDream-I1 4Bit Quantized Model
 
 This repository is a fork of `HiDream-I1` quantized to 4 bits, allowing the full model to run in less than 16GB of VRAM. 
